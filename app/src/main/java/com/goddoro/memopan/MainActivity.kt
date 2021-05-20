@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "NEED TO CHECK = "  + appPreference.needToCheckClipBoard)
 
         if (appPreference.needToCheckClipBoard && clipBoardUtil.isClipboardAvailable() && appPreference.curAppClipBoard != clipBoardUtil.getClipBoard()) {
-            ClipBoardBottomSheetDialog.show(supportFragmentManager, appPreference.curAppClipBoard)
+            ClipBoardBottomSheetDialog.show(supportFragmentManager, clipBoardUtil.getClipBoard())
             appPreference.needToCheckClipBoard = false
         }
 
