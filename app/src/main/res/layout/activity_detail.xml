@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.goddoro.memopan.presentation.detail.DetailViewModel" />
+
+    </data>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_1"
+        tools:context=".presentation.detail.DetailActivity">
+
+        <ImageView
+            android:id="@+id/img_back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> vm.onClickFinish()}"
+            app:layout_constraintTop_toTopOf="@+id/txt_title"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="@color/black"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:text="새 메모"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/divider"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title"/>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_title_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:boxBackgroundColor="@color/primaryYellow"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/divider">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edit_text_height"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/cardview_no_border"
+                android:hint="제목을 입력해주세요"
+                android:padding="1dp"
+                android:text="@={vm.title}"
+                android:textColor="@color/black"
+                android:textColorHint="#808080"
+                android:textSize="14dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_body_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="10dp"
+            app:boxBackgroundColor="@color/primaryYellow"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/black"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintEnabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/edit_title_layout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_body"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/cardview_no_border"
+                android:padding="1dp"
+                android:text="@={vm.body}"
+                android:gravity="top"
+                android:textColor="@color/black"
+                android:textColorHint="#808080"
+                android:textSize="14dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/txt_remove_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/edit_body_layout"
+            app:layout_constraintTop_toBottomOf="@id/edit_body_layout"
+            android:text="remove all"
+            android:onClick="@{() -> vm.onClickRemoveAll()}"
+            android:textColor="#ff0000"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="0dp"
+            android:onClick="@{() -> vm.onClickSave()}"
+            android:layout_height="wrap_content"
+            android:text="저장하기"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/edit_body_layout"
+            app:layout_constraintEnd_toEndOf="@+id/edit_body_layout"
+            android:backgroundTint="@color/buttonColor"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
