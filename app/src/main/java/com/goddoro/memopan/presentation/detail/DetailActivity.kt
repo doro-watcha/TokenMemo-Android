@@ -3,11 +3,14 @@ package com.goddoro.memopan.presentation.detail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.WindowManager
 import android.widget.Toast
 import com.goddoro.memopan.R
 import com.goddoro.memopan.databinding.ActivityDetailBinding
+import com.goddoro.memopan.utils.ToastUtil
 import com.goddoro.memopan.utils.observeOnce
 import com.goddoro.memopan.utils.startActivity
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailActivity : AppCompatActivity() {
@@ -15,6 +18,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityDetailBinding
 
     private val mViewModel : DetailViewModel by viewModel()
+
+    private val toastUtil : ToastUtil by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +31,9 @@ class DetailActivity : AppCompatActivity() {
 
         setContentView(mBinding.root)
 
+
+
+
         observeViewModel()
         checkBody()
     }
@@ -35,8 +43,12 @@ class DetailActivity : AppCompatActivity() {
         mViewModel.apply {
 
             onSaveComplete.observeOnce(this@DetailActivity){
-                Toast.makeText(this@DetailActivity,"메모 저장을 완료했습니다",Toast.LENGTH_SHORT).show()
+                toastUtil.createToast("${it}에 대한 메모를 저장하였습니다")?.show()
                 finish()
+            }
+
+            needToFillBody.observeOnce(this@DetailActivity){
+                toastUtil.createToast("내용을 입력해주세요")?.show()
             }
 
             clickFinish.observeOnce(this@DetailActivity){

@@ -14,4 +14,5 @@ object Broadcast {
 
     val moveToDetailBroadcast : PublishSubject<String> = PublishSubject.create()
 
+
 }

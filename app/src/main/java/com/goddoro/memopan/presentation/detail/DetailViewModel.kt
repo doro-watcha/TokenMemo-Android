@@ -1,5 +1,6 @@
 package com.goddoro.memopan.presentation.detail
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.goddoro.memopan.room.Memo
@@ -26,10 +27,11 @@ class DetailViewModel(private val memoDao: MemoDao) : ViewModel() {
     val title: MutableLiveData<String> = MutableLiveData()
     val body: MutableLiveData<String> = MutableLiveData()
 
-    val onSaveComplete: MutableLiveData<Once<Unit>> = MutableLiveData()
+    val onSaveComplete: MutableLiveData<Once<String>> = MutableLiveData()
 
     val clickFinish : MutableLiveData<Once<Unit>> = MutableLiveData()
 
+    val needToFillBody: MutableLiveData<Once<Unit>> = MutableLiveData()
     val errorInvoked: MutableLiveData<Once<Throwable>> = MutableLiveData()
 
 
@@ -41,6 +43,13 @@ class DetailViewModel(private val memoDao: MemoDao) : ViewModel() {
 
     fun onClickSave() {
 
+        if (body.value?.length == 0 || body.value == null) {
+            needToFillBody.value = Once(Unit)
+            Log.d(TAG, "가즈아")
+            return
+        }
+
+
         val memo = Memo(
             id = System.currentTimeMillis().toInt(),
             title = title.value ?: "",
@@ -51,10 +60,11 @@ class DetailViewModel(private val memoDao: MemoDao) : ViewModel() {
             .addSchedulers()
             .subscribe({
                 Broadcast.saveCompleteBroadcast.onNext(memo)
-                onSaveComplete.value = Once(Unit)
+                onSaveComplete.value = Once(title.value ?: "")
             }, {
                 errorInvoked.value = Once(it)
             }).disposedBy(compositeDisposable)
+
     }
 
     fun onClickFinish(){

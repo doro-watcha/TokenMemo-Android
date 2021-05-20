@@ -36,11 +36,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="새 메모"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="16dp"
             android:layout_height="wrap_content"/>
 
         <View
@@ -59,8 +59,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             app:boxBackgroundColor="@color/primaryYellow"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/black"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:hintEnabled="false"
@@ -90,8 +88,6 @@
             android:layout_height="150dp"
             android:layout_marginTop="10dp"
             app:boxBackgroundColor="@color/primaryYellow"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/black"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:hintEnabled="false"
@@ -103,7 +99,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/cardview_no_border"
-                android:padding="1dp"
+                android:padding="10dp"
                 android:text="@={vm.body}"
                 android:gravity="top"
                 android:textColor="@color/black"
@@ -112,17 +108,17 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <ImageView
             android:id="@+id/txt_remove_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:foreground="?android:selectableItemBackground"
             app:layout_constraintEnd_toEndOf="@id/edit_body_layout"
             app:layout_constraintTop_toBottomOf="@id/edit_body_layout"
-            android:text="remove all"
             android:onClick="@{() -> vm.onClickRemoveAll()}"
-            android:textColor="#ff0000"
             android:layout_marginTop="10dp"
-            android:textSize="15dp"/>
+            android:src="@drawable/ic_delete"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"

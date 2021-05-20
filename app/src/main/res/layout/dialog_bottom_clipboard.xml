@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -11,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@drawable/dialog_background">
 
         <ImageView
             android:id="@+id/img_close"
@@ -31,8 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:boxBackgroundColor="@color/primaryYellow"
-            app:endIconMode="clear_text"
-            app:endIconTint="@color/black"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:hintEnabled="false"
@@ -44,27 +43,29 @@
                 android:layout_height="150dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/cardview_no_border"
-                android:padding="1dp"
+                android:padding="10dp"
                 android:gravity="top"
+                tools:text="샘플 Input Text입니다 그런데 이정도면 괜찮겠지?"
                 android:text="@={vm.body}"
                 android:textColor="@color/black"
                 android:textColorHint="#808080"
                 android:textSize="14dp" />
 
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="저장하기"
+                android:onClick="@{() -> vm.onClickSave()}"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                app:backgroundTint="@color/buttonColor"
+                app:layout_constraintTop_toBottomOf="@+id/edit_body"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_save"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="저장하기"
-            android:onClick="@{() -> vm.onClickSave()}"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            app:backgroundTint="@color/buttonColor"
-            app:layout_constraintStart_toStartOf="@+id/edit_body_layout"
-            app:layout_constraintEnd_toEndOf="@+id/edit_body_layout"
-            app:layout_constraintTop_toBottomOf="@+id/edit_body_layout"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

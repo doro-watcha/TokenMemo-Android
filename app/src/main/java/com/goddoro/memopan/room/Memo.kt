@@ -1,8 +1,13 @@
 package com.goddoro.memopan.room
 
+import android.util.Log
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.goddoro.memopan.utils.Broadcast
 import com.google.gson.annotations.Expose
+import io.reactivex.disposables.Disposable
+import org.koin.core.KoinComponent
+import org.koin.core.get
 
 
 /**
@@ -26,4 +31,11 @@ data class Memo (
     var body : String? = ""
 
 
-)
+) : KoinComponent {
+
+    companion object {
+
+        val TAG = Memo::class.java.simpleName
+    }
+
+}

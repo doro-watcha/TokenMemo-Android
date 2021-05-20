@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.goddoro.memopan.R
 import com.goddoro.memopan.databinding.DialogBottomClipboardBinding
@@ -12,6 +13,7 @@ import com.goddoro.memopan.utils.AppPreference
 import com.goddoro.memopan.utils.Broadcast
 import com.goddoro.memopan.utils.ScreenUtil
 import com.goddoro.memopan.utils.observeOnce
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.ext.android.inject
@@ -36,11 +38,13 @@ class ClipBoardBottomSheetDialog (
 
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val bottomSheetDialog = BottomSheetDialog(requireContext(), theme)
+
+        val bottomSheetDialog = BottomSheetDialog(activity!!, theme)
 
         bottomSheetDialog.behavior.peekHeight = screenUtil.screenHeight
 
         return bottomSheetDialog
+
     }
 
     override fun onCreateView(
@@ -53,7 +57,6 @@ class ClipBoardBottomSheetDialog (
         if (dialog != null && dialog?.window != null) {
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-            dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         }
         return mBinding.root
     }
@@ -67,6 +70,13 @@ class ClipBoardBottomSheetDialog (
 
         initSetting()
         observeViewModel()
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle)
 
     }
 
